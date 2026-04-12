@@ -16,6 +16,12 @@ namespace ai_chat1
         {
             responses = new Dictionary<string, string>()
             {
+           
+                // General chatbot questions
+                { "how are you", "I'm functioning perfectly and ready to help you stay safe online!" },
+                { "purpose", "My purpose is to educate you about cybersecurity and help you avoid online threats." },
+                { "what can i ask", "You can ask me about passwords, phishing, safe browsing, and general online safety." },
+                { "help", "Try asking me about password safety, phishing scams, or safe browsing tips." },
                 { "how are you", "I'm functioning perfectly! Ready to help you stay safe online." },
                 { "purpose", "My purpose is to educate you about cybersecurity and online safety." },
                 { "password", "Use strong passwords with at least 8 characters, including numbers, symbols, and uppercase letters." },
