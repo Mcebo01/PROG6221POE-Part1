@@ -70,7 +70,7 @@ namespace ai_chat1
             // Check for matching keywords
             foreach (var item in responses)
             {
-                if (input.Contains(item.Key))
+                if (input.Contains(item.Key.ToLower()))
                 {
                     BotResponse(item.Value);
                     return true;
