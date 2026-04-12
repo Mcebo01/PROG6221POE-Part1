@@ -13,8 +13,8 @@ namespace ai_chat1
         {//start of constructor
             //]play the sound
             greetings();
-            //wait for 1 second
-            System.Threading.Thread.Sleep(1000);
+            //wait for 2 second
+            System.Threading.Thread.Sleep(2000);
             //turn logo to ascii
             asci();
 
