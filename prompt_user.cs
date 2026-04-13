@@ -1,131 +1,104 @@
 ﻿using System;
 
 namespace ai_chat1
-{//start of namespace
-    public class prompt_user
-    {//start of class
-        //global variable declaration, string datatype
-        //and variable name called name
-        //must be private
+{
+    // Handles user interaction (name input and greeting)
+    public class UserInterface
+    {
+        // Store user name
         private string name = string.Empty;
 
-
-
-        //welcome the user
+        // Displays welcome banner
         public void DisplayWelcomeMessage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("======================--------------------------------========================");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("                      [ Welcome to Shez$uper chatbot ]          ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("======================--------------------------------========================");
+            Console.WriteLine("===============================================================");
+            Console.WriteLine("        CYBERSECURITY AWARENESS CHATBOT SYSTEM                ");
+            Console.WriteLine("===============================================================");
             Console.ResetColor();
         }
 
+        // Ask user for their name
+        // Keeps the original void signature for compatibility with existing callers.
+        public void AskName()
+        {
+            PrintBot("Hello! Welcome to the Cybersecurity Awareness Bot.");
+            PrintBot("Please enter your name (type 'exit' to quit):");
 
-        //void method to prompt the user for name
-        //start with access modifier public
-        //then type of method void, then name of the
-        //method called asking_name()
-        public void asking_name()
-        { //start of asking name method
+            while (true)
+            {
+                SafeSetColor(ConsoleColor.Blue);
+                console.Write("You: ");
+                console.ResetColor();
 
-            //ask for name
+                var input = console.ReadLine() ?? string.Empty;
+                input = input.Trim();
 
-            //AI and colors
+                // Allow user to quit interaction
+                if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(input, "quit", StringComparison.OrdinalIgnoreCase))
+                {
+                    PrintBot("Goodbye!");
+                    Name = string.Empty;
+                    return;
+                }
 
-            //AI name
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("chatBot : ");
+                Name = input;
 
-            //AI message
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Please enter your name...");
+                if (IsValidName(Name))
+                {
+                    GreetUser();
+                    return;
+                }
 
-            //reset color
-            Console.ResetColor();
+                // invalid -> loop again
+            }
+        }
 
-            //do while to check and re-prompt the user
-            do
-            { //start of do while 
-
-                //user entering name
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write("user : ");
-
-                //input color
-                Console.ForegroundColor = ConsoleColor.Gray;
-
-                name = Console.ReadLine();
-
-                //reset color
-                Console.ResetColor();
-
-
-            } while (!check_name());//end of do while
-
-
-        }//end of the asking name method
-
-        //boolean method to check if the user entered name
-        //start by the access modifier must be private
-        //then the type of method boolean then name of it
-        //check_name()
-        private Boolean check_name()
-        { //start of check_name
-
-
-            //check if the name is entered using if statement
-            if (name == "")
-            { //start if statement
-
-                //show error message
-                //AI name
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("chatBot : ");
-
-                //AI message
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Please try to enter your name...");
-
-                //reset color
-                Console.ResetColor();
-
-                //return false
+        // Validate user name input
+        private bool IsValidName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                PrintBot("Name cannot be empty. Please try again.");
                 return false;
-            }//end of if statement
-            else
-            {//start of else
+            }
 
-                //return the success message
-                //AI name
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("chatBot : ");
+            return true;
+        }
 
-                //AI message
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write("Hey ");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.Write(" " + name);
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(" how can i help you");
+        // Greet user after valid input
+        private void GreetUser()
+        {
+            PrintBot($"Welcome {Name}! I'm here to help you stay safe online.");
+        }
 
-                //reset color
-                Console.ResetColor();
-                //return
-                return true;
+        // Standard chatbot output format
+        private void PrintBot(string message)
+        {
+            SafeSetColor(ConsoleColor.Yellow);
+            console.Write("ChatBot: ");
 
-            }//end of else
+            SafeSetColor(ConsoleColor.Magenta);
+            console.WriteLine(message);
 
-        }//end of check_name method
+            console.ResetColor();
+        }
 
+        // Return user's name (keeps existing API)
+        public string GetName() => Name;
 
-        //method to return the name of the user
-        public string return_name()
-        {//start of return name method
-            //return the name of the user
-            return name;
-        }//end of return name method
-    }//end of class
-}//end of namespace
+        // Helper that wraps color setting to avoid leaving console in wrong color if an exception occurs.
+        private void SafeSetColor(ConsoleColor color)
+        {
+            try
+            {
+                console.SetForegroundColor(color);
+            }
+            catch
+            {
+                // If the underlying console does not support colors, ignore.
+            }
+        }
+    }
+}
