@@ -62,7 +62,6 @@
     <Content Include="greet.wav" />
     <Content Include="greet.wav" />
     <Content Include="logo.jpg" />
->>>>>>> 4d77118d2499b4899b376d0da16599979c1f7f9f
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
