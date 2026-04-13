@@ -1,5 +1,4 @@
 # ai_chat1
-# Cybersecurity Awareness Chatbot
 
 ## Overview
 This project is a C# console-based chatbot designed to educate users about basic cybersecurity practices.  
