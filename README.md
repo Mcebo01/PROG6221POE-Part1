@@ -60,7 +60,7 @@ This project uses **GitHub Actions** for Continuous Integration.
 
 ###  CI Workflow Screenshot
 
-![CI Build Success](commits.png)
+![commits](commits.png)
 
 ---
 
