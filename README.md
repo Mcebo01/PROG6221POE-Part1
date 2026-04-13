@@ -39,7 +39,7 @@ It provides interactive responses to help users understand topics such as passwo
 
 ---
 
-## 💡 Example Questions You Can Ask
+##  Example Questions You Can Ask
 
 - How are you?
 - What is your purpose?
@@ -61,8 +61,6 @@ This project uses **GitHub Actions** for Continuous Integration.
 ###  CI Workflow Screenshot
 
 (Insert your screenshot here)
-
-Example:
 
 ![CI Build Success](your-screenshot-image.png)
 
