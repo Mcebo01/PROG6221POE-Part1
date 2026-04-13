@@ -15,21 +15,18 @@ namespace ai_chat1
         public ChatBot()
         {
             responses = new Dictionary<string, string>()
-            {
-           
-                // General chatbot questions
+            {//chatbot questions
                 { "how are you", "I'm functioning perfectly and ready to help you stay safe online!" },
                 { "purpose", "My purpose is to educate you about cybersecurity and help you avoid online threats." },
                 { "what can i ask", "You can ask me about passwords, phishing, safe browsing, and general online safety." },
                 { "help", "Try asking me about password safety, phishing scams, or safe browsing tips." },
-                { "how are you", "I'm functioning perfectly! Ready to help you stay safe online." },
-                { "purpose", "My purpose is to educate you about cybersecurity and online safety." },
                 { "password", "Use strong passwords with at least 8 characters, including numbers, symbols, and uppercase letters." },
                 { "phishing", "Phishing is a scam where attackers trick you into revealing personal information via fake emails or websites." },
                 { "link", "Avoid clicking suspicious links. Always check if the URL is legitimate before opening it." },
                 { "safe browsing", "Always use secure websites (https), avoid downloads from unknown sources, and keep your browser updated." }
             };
         }
+       
         // Main chat loop
         public void StartChat(string userName)
         {

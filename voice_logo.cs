@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Drawing;
 using System.Media;
+using System.IO;
+using System.Threading;
 
 namespace ai_chat1
-{//start of namespace
+{
     public class voice_logo
-    {//start of class
+    {
+        string basePath = AppDomain.CurrentDomain.BaseDirectory;
+        string projectPath;
 
-        //Auto get the path directory of the project
-        private string full_path = AppDomain.CurrentDomain.BaseDirectory;
         public voice_logo()
-        {//start of constructor
-            //]play the sound
+        {
+            projectPath = Directory.GetParent(basePath).Parent.Parent.FullName;
+
             greetings();
-            //wait for 2 second
-            System.Threading.Thread.Sleep(2000);
-            //turn logo to ascii
+            Thread.Sleep(2000);
             asci();
+        }
 
-
-        }//end of constructor
-
-        //method to play the sound
         private void greetings()
         {
-            string corrected_path = full_path.Replace(@"\bin\Debug\", @"\greeting.wav");
+            string audioPath = Path.Combine(projectPath, "greeting.wav"); //  correct file name
 
             try
             {
-                SoundPlayer greet = new SoundPlayer(corrected_path);
+                SoundPlayer greet = new SoundPlayer(audioPath);
                 greet.Play();
             }
             catch (Exception ex)
@@ -37,32 +35,15 @@ namespace ai_chat1
                 Console.WriteLine("Error loading audio: " + ex.Message);
                 Console.ResetColor();
             }
-        
+        }
 
-            //use the soundPlay class to play audio
-            //creating an instance of the SoundPlayer class
-            //with an object name "greet"
-            try
-            {
-                SoundPlayer greet = new SoundPlayer(corrected_path);
-                greet.Play();
-            }
-            catch
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Audio file not found.");
-                Console.ResetColor();
-            }
-        }//end of method
-
-        //method to turn logo to ascii
         private void asci()
         {
-            string path = full_path.Replace(@"\bin\Debug\", @"\logo.jpg");
+            string imagePath = Path.Combine(projectPath, "logo.jpg");
 
             try
             {
-                Bitmap image = new Bitmap(path);
+                Bitmap image = new Bitmap(imagePath); // fixed
 
                 int width = 100;
                 int height = 70;
@@ -78,9 +59,7 @@ namespace ai_chat1
                     for (int x = 0; x < resized.Width; x++)
                     {
                         Color pixel = resized.GetPixel(x, y);
-
                         int gray = (pixel.R + pixel.G + pixel.B) / 3;
-
                         int index = (gray * (asciiChars.Length - 1)) / 255;
 
                         Console.Write(asciiChars[index]);
@@ -97,5 +76,5 @@ namespace ai_chat1
                 Console.ResetColor();
             }
         }
-    } //end of class
-}//end of namespace
+    }
+}
